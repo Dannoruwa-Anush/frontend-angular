@@ -1,3 +1,14 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+import { LayoutComponent } from './shared/reusable_components/layout-component/layout-component';
+import { HomeComponent } from './pages/home-component/home-component';
+import { ProductsComponent } from './pages/products-component/products-component';
+
+export const routes: Routes = [{
+        path: '',
+        component: LayoutComponent,
+        children: [
+            { path: '', component: HomeComponent },
+            { path: 'products', component: ProductsComponent },
+        ]
+    }];

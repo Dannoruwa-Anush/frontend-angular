@@ -1,0 +1,9 @@
+<div class="slideshow-container">
+    <div class="slide fade" *ngFor="let img of images; let i = index" [class.active]="i === currentSlide">
+        <img [src]="img" alt="banner" />
+    </div>
+
+    <!-- Arrows -->
+    <a class="prev" (click)="prevSlide()">&#10094;</a>
+    <a class="next" (click)="nextSlide()">&#10095;</a>
+</div>

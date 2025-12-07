@@ -1,0 +1,24 @@
+<mat-toolbar class="app-header">
+  <img src="../../../../assets/images/logo/logo.png" class="logo" />
+
+  <!-- Desktop Navigation -->
+  <div class="desktop-links">
+    <button mat-button routerLink="/">Home</button>
+    <button mat-button routerLink="/products">Products</button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <button mat-icon-button class="mobile-menu-btn">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <!-- Right Icons -->
+  <div class="toolbar-right">
+    <button mat-icon-button routerLink="/cart">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+    <button mat-icon-button routerLink="/profile">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

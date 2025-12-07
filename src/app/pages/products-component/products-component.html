@@ -1,0 +1,12 @@
+<div class="products-container">
+    <div class="brand-select">
+        <mat-form-field appearance="fill">
+            <mat-label>Select Brand</mat-label>
+            <mat-select [(ngModel)]="selectedBrand">
+                <mat-option *ngFor="let brand of brands" [value]="brand">
+                    {{ brand.brandName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
