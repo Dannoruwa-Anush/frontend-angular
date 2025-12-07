@@ -27,15 +27,15 @@ export class ProductsComponent implements OnInit {
   constructor(
     private router: Router,
     private brandService: BrandService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadBrands();
   }
 
   private loadBrands(): void {
-    this.brandService.getAllBrands().subscribe(res => {
-      this.brands = res.data;
+    this.brandService.getAll().subscribe(res => {
+      this.brands = res.data || [];
     });
   }
 }
