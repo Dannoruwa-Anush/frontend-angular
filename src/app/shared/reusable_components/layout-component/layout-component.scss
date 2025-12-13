@@ -14,6 +14,12 @@
   padding: 20px;
 }
 
+.content.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Mobile padding reduce */
 @media (max-width: 768px) {
   .content {
