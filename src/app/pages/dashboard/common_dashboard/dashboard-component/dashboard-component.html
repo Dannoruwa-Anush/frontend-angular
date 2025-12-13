@@ -1,18 +1,19 @@
 <div class="dashboard-container">
-
-  <!-- LEFT COLUMN: NAV -->
-  <div class="sidebar">
+  <!-- Sidebar -->
+  <nav class="dashboard-sidenav">
     <button
+      *ngFor="let item of navItems"
       mat-button
-      *ngFor="let item of menuItems"
-      (click)="navigate(item.route)">
-      {{ item.label }}
+      routerLink="{{item.route}}"
+      routerLinkActive="active"
+    >
+      <mat-icon>{{item.icon}}</mat-icon>
+      <span>{{item.label}}</span>
     </button>
-  </div>
+  </nav>
 
-  <!-- RIGHT COLUMN: CONTENT -->
-  <div class="content">
+  <!-- Main content -->
+  <div class="dashboard-content">
     <router-outlet></router-outlet>
   </div>
-
 </div>
