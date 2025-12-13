@@ -1,12 +1,39 @@
-<div class="products-container">
-    <div class="brand-select">
-        <mat-form-field appearance="fill">
-            <mat-label>Select Brand</mat-label>
-            <mat-select [(ngModel)]="selectedBrand">
-                <mat-option *ngFor="let brand of brands" [value]="brand">
-                    {{ brand.brandName }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-</div>
+<mat-toolbar class="products-toolbar" color="primary">
+
+  <!-- LEFT: Dropdowns -->
+  <div class="left-section">
+    <button mat-button [matMenuTriggerFor]="productsMenu">
+      Products
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+
+    <mat-menu #productsMenu="matMenu">
+      <button mat-menu-item>All Products</button>
+      <button mat-menu-item>New Arrivals</button>
+      <button mat-menu-item>Best Sellers</button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="categoryMenu">
+      Category
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+
+    <mat-menu #categoryMenu="matMenu">
+      <button mat-menu-item>Electronics</button>
+      <button mat-menu-item>Clothing</button>
+      <button mat-menu-item>Accessories</button>
+    </mat-menu>
+  </div>
+
+  <!-- CENTER: Search -->
+  <div class="center-section">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Search products" />
+      <button mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+</mat-toolbar>

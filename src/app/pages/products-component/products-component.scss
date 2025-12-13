@@ -1,0 +1,40 @@
+.products-toolbar {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Left dropdown container */
+.left-section {
+  display: flex;
+  gap: 8px;
+}
+
+/* Center search container */
+.center-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.search-field {
+  width: 320px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .products-toolbar {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .center-section {
+    justify-content: stretch;
+  }
+
+  .search-field {
+    width: 100%;
+  }
+}
