@@ -1,11 +1,14 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Inject } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { BASE_URL } from '../../../app.config';
 import { ApiResponse, handleError } from '../../../utils/apiUtils';
 
-export class CrudBaseService<T> {
+@Injectable({
+    providedIn: 'root'
+})
+export abstract class CrudBaseService<T> {
 
     protected apiBaseUrl: string;
 
@@ -13,14 +16,20 @@ export class CrudBaseService<T> {
         protected http: HttpClient,
         @Inject(BASE_URL) protected baseUrl: string,
         protected endpoint: string
-    ) { 
-        // Append api to baseUrl
-        this.apiBaseUrl = `${this.baseUrl}api`;
+    ) {
+        this.apiBaseUrl = `${this.baseUrl.replace(/\/$/, '')}/api`;
     }
 
-    // Get all
-    getAll(): Observable<ApiResponse<T[]>> {
-        return this.http.get<ApiResponse<T[]>>(`${this.apiBaseUrl}/${this.endpoint}`)
+    // Get all records with optional query params
+    getAll(params?: Record<string, string | number | boolean>): Observable<ApiResponse<T[]>> {
+        let httpParams = new HttpParams();
+        if (params) {
+            Object.keys(params).forEach(key => {
+                httpParams = httpParams.set(key, String(params[key]));
+            });
+        }
+
+        return this.http.get<ApiResponse<T[]>>(`${this.apiBaseUrl}/${this.endpoint}`, { params: httpParams })
             .pipe(
                 catchError(handleError<ApiResponse<T[]>>({
                     statusCode: 500,
@@ -30,7 +39,7 @@ export class CrudBaseService<T> {
             );
     }
 
-    // Get By ID
+    // Get by ID
     getById(id: number): Observable<ApiResponse<T | null>> {
         return this.http.get<ApiResponse<T>>(`${this.apiBaseUrl}/${this.endpoint}/${id}`)
             .pipe(
@@ -42,7 +51,7 @@ export class CrudBaseService<T> {
             );
     }
 
-    // Create a new record
+    // Create
     create(item: T): Observable<ApiResponse<T | null>> {
         return this.http.post<ApiResponse<T>>(`${this.apiBaseUrl}/${this.endpoint}`, item)
             .pipe(
@@ -54,7 +63,7 @@ export class CrudBaseService<T> {
             );
     }
 
-    // Update an existing record
+    // Update
     update(id: number, item: T): Observable<ApiResponse<T | null>> {
         return this.http.put<ApiResponse<T>>(`${this.apiBaseUrl}/${this.endpoint}/${id}`, item)
             .pipe(
@@ -66,7 +75,7 @@ export class CrudBaseService<T> {
             );
     }
 
-    // Delete an existing record
+    // Delete
     delete(id: number): Observable<ApiResponse<null>> {
         return this.http.delete<ApiResponse<null>>(`${this.apiBaseUrl}/${this.endpoint}/${id}`)
             .pipe(

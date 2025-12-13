@@ -20,7 +20,19 @@ export const routes: Routes = [{
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
 
+            // ------ [Start : AuthGuard routes] ----------------
+            /*
+            { 
+                path: 'placeOrder', 
+                component: PlaceOrderComponent, 
+                canActivate: [AuthGuard], 
+                data: { roles: ['Customer'] } 
+            },
+            */
+
             // Adding dashboard routes
             ...DASHBOARD_ROUTES,
+
+            // ------ [End : AuthGuard routes] ----------------
         ]
     }];
