@@ -7,6 +7,7 @@ import { ProductComponent } from './pages/product-component/product-component';
 import { ShoppingCartComponent } from './pages/shopping-cart-component/shopping-cart-component';
 import { LoginComponent } from './pages/auth/login-component/login-component';
 import { RegisterComponent } from './pages/auth/register-component/register-component';
+import { DASHBOARD_ROUTES } from './pages/dashboard/dashboardRoutes';
 
 export const routes: Routes = [{
         path: '',
@@ -18,5 +19,8 @@ export const routes: Routes = [{
             { path: 'cart', component: ShoppingCartComponent },
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
+
+            // Adding dashboard routes
+            ...DASHBOARD_ROUTES,
         ]
     }];

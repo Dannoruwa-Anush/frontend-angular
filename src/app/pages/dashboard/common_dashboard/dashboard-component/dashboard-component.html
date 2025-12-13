@@ -1,0 +1,18 @@
+<div class="dashboard-container">
+
+  <!-- LEFT COLUMN: NAV -->
+  <div class="sidebar">
+    <button
+      mat-button
+      *ngFor="let item of menuItems"
+      (click)="navigate(item.route)">
+      {{ item.label }}
+    </button>
+  </div>
+
+  <!-- RIGHT COLUMN: CONTENT -->
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>
