@@ -111,7 +111,7 @@ export class ProductsComponent implements OnInit {
   // ---------------- UI HELPERS ----------------
 
   openProduct(id: number) {
-    this.router.navigate(['/products', id]);
+    this.router.navigate(['/product', id]);
   }
 
   getImageUrl(item: ElectronicItemModel): string {
