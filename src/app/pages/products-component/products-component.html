@@ -1,35 +1,59 @@
+<!-- FILTER TOOLBAR -->
 <mat-toolbar class="products-toolbar" color="primary">
 
   <!-- LEFT: Dropdowns -->
   <div class="left-section">
-    <button mat-button [matMenuTriggerFor]="productsMenu">
-      Products
+
+    <!-- Brands -->
+    <button mat-button [matMenuTriggerFor]="brandsMenu">
+      Brands
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
 
-    <mat-menu #productsMenu="matMenu">
-      <button mat-menu-item>All Products</button>
-      <button mat-menu-item>New Arrivals</button>
-      <button mat-menu-item>Best Sellers</button>
+    <mat-menu #brandsMenu="matMenu">
+      <button mat-menu-item (click)="onBrandSelect(undefined)">
+        All Brands
+      </button>
+
+      <button
+        mat-menu-item
+        *ngFor="let brand of brands"
+        (click)="onBrandSelect(brand.brandID)">
+        {{ brand.brandName }}
+      </button>
     </mat-menu>
 
+    <!-- Categories -->
     <button mat-button [matMenuTriggerFor]="categoryMenu">
       Category
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
 
     <mat-menu #categoryMenu="matMenu">
-      <button mat-menu-item>Electronics</button>
-      <button mat-menu-item>Clothing</button>
-      <button mat-menu-item>Accessories</button>
+      <button mat-menu-item (click)="onCategorySelect(undefined)">
+        All Categories
+      </button>
+
+      <button
+        mat-menu-item
+        *ngFor="let category of categories"
+        (click)="onCategorySelect(category.categoryID)">
+        {{ category.categoryName }}
+      </button>
     </mat-menu>
+
   </div>
 
   <!-- CENTER: Search -->
   <div class="center-section">
     <mat-form-field appearance="outline" class="search-field">
       <mat-label>Search</mat-label>
-      <input matInput placeholder="Search products" />
+      <input
+        matInput
+        [(ngModel)]="searchText"
+        (input)="applyFilters()"
+        placeholder="Search products" />
+
       <button mat-icon-button matSuffix>
         <mat-icon>search</mat-icon>
       </button>
@@ -37,3 +61,46 @@
   </div>
 
 </mat-toolbar>
+
+<!-- PRODUCTS GRID -->
+<div class="products-grid">
+
+  <mat-card
+    class="product-card"
+    *ngFor="let item of items"
+    [class.out-of-stock]="item.qoh === 0"
+    (click)="item.qoh > 0 && openProduct(item.electronicItemID)"
+  >
+
+    <img
+      mat-card-image
+      [src]="getImageUrl(item)"
+      alt="{{ item.electronicItemName }}"
+    />
+
+    <mat-card-content>
+      <h3 class="product-name">
+        {{ item.electronicItemName }}
+      </h3>
+
+      <p class="product-price">
+        Rs. {{ item.price | number }}
+      </p>
+
+      <span
+        class="stock-status"
+        [class.in-stock]="item.qoh > 0"
+        [class.out-stock]="item.qoh === 0"
+      >
+        {{ item.qoh > 0 ? 'Available' : 'Out of stock' }}
+      </span>
+    </mat-card-content>
+
+  </mat-card>
+
+</div>
+
+<!-- EMPTY STATE -->
+<div *ngIf="items.length === 0" class="empty-state">
+  No products found
+</div>

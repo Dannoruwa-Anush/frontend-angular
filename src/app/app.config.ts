@@ -17,6 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
 
     // 3. Provide the backend URL
-    { provide: BASE_URL, useValue: 'http://localhost:5106/api' }
+    { provide: BASE_URL, useValue: 'http://localhost:5106/' }
   ]
 };

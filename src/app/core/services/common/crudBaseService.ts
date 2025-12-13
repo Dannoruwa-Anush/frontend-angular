@@ -7,15 +7,20 @@ import { ApiResponse, handleError } from '../../../utils/apiUtils';
 
 export class CrudBaseService<T> {
 
+    protected apiBaseUrl: string;
+
     constructor(
         protected http: HttpClient,
         @Inject(BASE_URL) protected baseUrl: string,
         protected endpoint: string
-    ) { }
+    ) { 
+        // Append api to baseUrl
+        this.apiBaseUrl = `${this.baseUrl}api`;
+    }
 
     // Get all
     getAll(): Observable<ApiResponse<T[]>> {
-        return this.http.get<ApiResponse<T[]>>(`${this.baseUrl}/${this.endpoint}`)
+        return this.http.get<ApiResponse<T[]>>(`${this.apiBaseUrl}/${this.endpoint}`)
             .pipe(
                 catchError(handleError<ApiResponse<T[]>>({
                     statusCode: 500,
@@ -27,7 +32,7 @@ export class CrudBaseService<T> {
 
     // Get By ID
     getById(id: number): Observable<ApiResponse<T | null>> {
-        return this.http.get<ApiResponse<T>>(`${this.baseUrl}/${this.endpoint}/${id}`)
+        return this.http.get<ApiResponse<T>>(`${this.apiBaseUrl}/${this.endpoint}/${id}`)
             .pipe(
                 catchError(handleError<ApiResponse<T | null>>({
                     statusCode: 500,
@@ -39,7 +44,7 @@ export class CrudBaseService<T> {
 
     // Create a new record
     create(item: T): Observable<ApiResponse<T | null>> {
-        return this.http.post<ApiResponse<T>>(`${this.baseUrl}/${this.endpoint}`, item)
+        return this.http.post<ApiResponse<T>>(`${this.apiBaseUrl}/${this.endpoint}`, item)
             .pipe(
                 catchError(handleError<ApiResponse<T | null>>({
                     statusCode: 500,
@@ -51,7 +56,7 @@ export class CrudBaseService<T> {
 
     // Update an existing record
     update(id: number, item: T): Observable<ApiResponse<T | null>> {
-        return this.http.put<ApiResponse<T>>(`${this.baseUrl}/${this.endpoint}/${id}`, item)
+        return this.http.put<ApiResponse<T>>(`${this.apiBaseUrl}/${this.endpoint}/${id}`, item)
             .pipe(
                 catchError(handleError<ApiResponse<T | null>>({
                     statusCode: 500,
@@ -63,7 +68,7 @@ export class CrudBaseService<T> {
 
     // Delete an existing record
     delete(id: number): Observable<ApiResponse<null>> {
-        return this.http.delete<ApiResponse<null>>(`${this.baseUrl}/${this.endpoint}/${id}`)
+        return this.http.delete<ApiResponse<null>>(`${this.apiBaseUrl}/${this.endpoint}/${id}`)
             .pipe(
                 catchError(handleError<ApiResponse<null>>({
                     statusCode: 500,
