@@ -10,6 +10,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
+
+//??
 import { FormsModule } from '@angular/forms';
 
 // Angular Material modules array
@@ -22,6 +25,8 @@ const materialModules = [
   MatSelectModule,
   MatMenuModule,
   MatFormFieldModule,
+  MatTableModule,
+  //??
   FormsModule,
 ];
 
