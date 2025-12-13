@@ -15,10 +15,21 @@
   <!-- Right Icons -->
   <div class="toolbar-right">
     <button mat-icon-button routerLink="/cart">
-      <mat-icon routerLink="/cart">shopping_cart</mat-icon>
+      <mat-icon>shopping_cart</mat-icon>
     </button>
-    <button mat-icon-button routerLink="/login">
+
+    <!-- Account Dropdown -->
+    <button mat-icon-button [matMenuTriggerFor]="accountMenu">
       <mat-icon>account_circle</mat-icon>
     </button>
+    <mat-menu #accountMenu="matMenu">
+      <ng-container *ngIf="authService.isLoggedIn(); else loginLink">
+        <span class="user-email">{{ authService.getEmail() }}</span>
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </ng-container>
+      <ng-template #loginLink>
+        <button mat-menu-item routerLink="/login">Login</button>
+      </ng-template>
+    </mat-menu>
   </div>
 </mat-toolbar>

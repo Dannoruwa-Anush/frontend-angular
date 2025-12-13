@@ -56,6 +56,11 @@ export class AuthService {
         return sessionStorage.getItem('role');
     }
 
+    // Get stored user email
+    getEmail(): string | null {
+        return sessionStorage.getItem('email');
+    }
+
     // Check if user is logged in
     isLoggedIn(): boolean {
         return !!this.getToken();

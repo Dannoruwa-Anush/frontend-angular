@@ -22,6 +22,16 @@
 .toolbar-right {
   margin-left: auto;
   display: flex;
+  align-items: center;
+  gap: 8px;
+
+  /* Style user email inside mat-menu */
+  .user-email {
+    display: block;
+    padding: 0 16px;
+    font-weight: 500;
+    color: #333;
+  }
 }
 
 /* Logo */
@@ -46,5 +56,10 @@
   /* Shrink logo */
   .logo {
     height: 32px;
+  }
+
+  /* Toolbar right icons spacing */
+  .toolbar-right {
+    gap: 4px;
   }
 }
